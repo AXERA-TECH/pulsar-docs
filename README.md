@@ -10,20 +10,10 @@
 
 ## 2. 本地运行指南
 
-### 2.1 git clone & update submodule
-
-注意: 开发机需要安装 Git LFS, 如果未安装可以通过以下命令安装
+### 2.1 git clone
 
 ```bash
-git lfs install
-```
-
-安装 lfs 服务后, 执行
-
-```bash
-git clone git@git-ext.axera-tech.com:npu/superpulsar-doc.git
-# update ax-samples
-git submodule update --init --recursive
+git clone https://github.com/AXERA-TECH/superpulsar-doc.git
 ```
 
 目录树如下:
