@@ -1,0 +1,9 @@
+﻿支持属性,性能说明,备注
+kernel_shape,"kernel_shape 为 3 时, 能达到 100% 性能",其他取值情况下效率低于50%
+,"kernel_shape 为 1 时,性能降至 89%, 此时要求 input_channel % 32 == 0",
+pads,kernel_shape 为 3 且 pads 为 1 时最高效,/
+strides,"stride_h = 1, stride_w <= 2 时, 性能为 100%","stride = [2, 2] 下效率约为:  output_channel / (output_channel + 8)"
+,"其他情况下, output_channel 越大越高效","当 kernel_shape 为 3 时, 避免 strdies 为 3"
+auto_pad,/,仅支持配置为 NOTSET
+dilations,效率计算为: kernel_shape / ((kernel_shape - 1) * dilation + 1),会浪费补满 dilation 所需的计算量
+group,"channel / group 是 16 倍数时效率最高, 但 input_width 必须为 32 的倍数",例如: depthwise conv 效率 1/16
