@@ -1,5 +1,7 @@
 # SuperPulsar User Manual
 
+[Web 预览](https://superpulsar-docs.readthedocs.io/zh_CN/latest/index.html#)
+
 ## 1. 项目背景
 
 爱芯元智 AI 工具链使用手册公共维护项目
