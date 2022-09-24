@@ -558,7 +558,7 @@ CPU子图的设置
 
 .. note::
 
-  ``AXEngine`` 是 ``Axera`` 自研的推理库, 可以在某种程度上提升模型的 ``FPS`` , 本质上是将 ``ONNX`` 的 ``CPU`` 子图替换为了 ``AXE`` 子图, 在内存使用方面, ``AXE`` 子图在某些模型上的内存使用量也会大幅度降低, 最差情况下也是和原来 ``ONNX`` 持平.
+  ``AXEngine`` 是 ``AXera`` 自研的推理库, 可以在某种程度上提升模型的 ``FPS`` , 本质上是将 ``ONNX`` 的 ``CPU`` 子图替换为了 ``AXE`` 子图, 在内存使用方面, ``AXE`` 子图在某些模型上的内存使用量也会大幅度降低, 最差情况下也是和原来 ``ONNX`` 持平.
 
 .. list-table::
     :widths: 15 40
@@ -575,7 +575,7 @@ CPU子图的设置
     * - 可选列表
       - /
     * - 注意事项  
-      - 如果需要使带 ``AXEngine`` 后端的 ``Joint`` 模型可以在某一个旧版不支持 ``AXEngine`` 后端的 ``BSP`` 上运行时, 需要同时开启 ``onnx_setting.mode`` 与 ``axe_setting.mode`` 为 ``ENABLE``
+      - 如果需要使带 ``AXEngine`` 后端的 ``joint`` 模型可以在某一个旧版不支持 ``AXEngine`` 后端的 ``BSP`` 上运行时, 需要同时开启 ``onnx_setting.mode`` 与 ``axe_setting.mode`` 为 ``ENABLE``
     
 代码示例
 

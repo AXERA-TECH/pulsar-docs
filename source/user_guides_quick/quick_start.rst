@@ -10,7 +10,7 @@ Quick Start
 * 如何使用 ``joint`` 模型在 ``x86`` 平台上仿真运行
 * 如何衡量 ``joint`` 的推理结果与 ``onnx`` 推理结果之间的差异度(内部称之为 ``对分``)
 
-本章节提到的模型的板上运行速度是基于工具链 ``axera_neuwizard_v0.6.1.4.tar.gz`` 编译生成的, 并不作为实际性能评估的依据.
+本章节提到的模型的板上运行速度是基于工具链 ``axera_neuwizard_v0.6.1.14.tar.gz`` 编译生成的, 并不作为实际性能评估的依据.
 
 .. note::
 
@@ -49,20 +49,24 @@ Quick Start
 安装 SuperPulsar 工具链
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-以系统版本为 ``Ubuntu 18.04``、工具链 ``axera_neuwizard_v0.6.1.4.tar.gz`` 为例说明 ``SuperPulsar`` 工具链的安装方法.
+以系统版本为 ``Ubuntu 18.04``、工具链 ``axera_neuwizard_v0.6.1.14.tar.gz`` 为例说明 ``SuperPulsar`` 工具链的安装方法.
+工具链获取途径：
+
+- 从 AX-Pi 社区工具链仓库下载；
+- 通过企业途径向 AXera 签署 NDA 后由其技术支持人员释放。
 
 ^^^^^^^^^^^^^^^^^^^^^^^
 载入 Docker Image
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-解压 ``axera_neuwizard_v0.6.1.4.tar.gz`` 后进入 ``axera_neuwizard_v0.6.1.4`` 目录, 运行 ``install.sh`` 脚本, 加载工具链镜像文件. 代码示例如下:
+解压 ``axera_neuwizard_v0.6.1.14.tar.gz`` 后进入 ``axera_neuwizard_v0.6.1.14`` 目录, 运行 ``install.sh`` 脚本, 加载工具链镜像文件. 代码示例如下:
 
 .. code-block:: shell
 
-    $ tar -xvf axera_neuwizard_v0.6.1.4.tar.gz  # 工具链由内部工作人员发送给用户
-    $ cd axera_neuwizard_v0.6.1.4
+    $ tar -xvf axera_neuwizard_v0.6.1.14.tar.gz
+    $ cd axera_neuwizard_v0.6.1.14
     $ ls .
-    axera_neuwizard_0.6.1.4.tgz  install.sh  VERSION
+    axera_neuwizard_0.6.1.14.tgz  install.sh  VERSION
     $ sudo ./install.sh
 
 其中 ``install.sh`` 为可执行脚本, 用于加载 ``.tgz`` 镜像文件. 正确导入镜像文件会打印以下日志:
@@ -78,7 +82,7 @@ Quick Start
     ee6ebe7bedc1: Loading layer [==================================================]   5.12kB/5.12kB
     45f02a0e56e2: Loading layer [==================================================]  2.048kB/2.048kB
     9758fe1f19bd: Loading layer [==================================================]   2.56kB/2.56kB
-    Loaded image: axera/neuwizard:0.6.1.4
+    Loaded image: axera/neuwizard:0.6.1.14
 
 完成后, 执行 ``sudo docker image ls``
 
@@ -87,7 +91,7 @@ Quick Start
     $ sudo docker image ls
     # 打印以下数据
     REPOSITORY                               TAG           IMAGE ID       CREATED         SIZE
-    axera/neuwizard                          0.6.1.4       2124c702c879   3 weeks ago     3.24GB
+    axera/neuwizard                          0.6.1.14       2124c702c879   3 weeks ago     3.24GB
 
 可以看到工具链镜像已经成功载入, 之后便可以基于此镜像启动容器.
 
@@ -104,7 +108,7 @@ Quick Start
 
 .. code-block:: shell
 
-    $ sudo docker run -it --net host --rm --shm-size 32g -v $PWD:/data axera/neuwizard:0.6.1.4
+    $ sudo docker run -it --net host --rm --shm-size 32g -v $PWD:/data axera/neuwizard:0.6.1.14
 
 其中 ``--shm-size`` 参数推荐设置为 ``32g`` 及以上,  ``-v`` 参数控制外部文件夹与容器内部文件夹的映射, 例如 ``$PWD:/data`` 表示将当前文件夹映射至容器中的 ``/data`` 文件夹下. 
 
@@ -114,7 +118,7 @@ Quick Start
 模型编译仿真以及对分说明
 -------------------------
 
-本章节介绍 ``ONNX`` 模型转换的基本操作, 使用 ``pulsar`` 工具将 ``ONNX``  模型编译成 ``Joint`` 模型. 请先参考 :ref:`开发环境准备 <dev_env_prepare>` 章节完成开发环境搭建. 
+本章节介绍 ``ONNX`` 模型转换的基本操作, 使用 ``pulsar`` 工具将 ``ONNX``  模型编译成 ``joint`` 模型. 请先参考 :ref:`开发环境准备 <dev_env_prepare>` 章节完成开发环境搭建. 
 本节示例模型为开源模型 ``ResNet18``.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,7 +127,7 @@ Quick Start
 
 .. hint::
 
-    本章节所需模型 ``ResNet18`` 及相关依赖已在 ``quick_start_example`` 文件夹中提供 百度网盘地址待补充 然后将下载的文件解压后拷贝到 ``docker`` 的 ``/data`` 路径下.
+    本章节所需模型 ``ResNet18`` 及相关依赖已在 ``quick_start_example`` 文件夹中提供 `quick_start_example.zip 下载地址 <https://github.com/AXERA-TECH/ax-samples/releases/download/v0.3/quick_start_example.zip>`_  然后将下载的文件解压后拷贝到 ``docker`` 的 ``/data`` 路径下.
 
 成功启动工具链镜像后, 将 ``quick_start_example.zip`` 解压后得到的五个文件夹复制到 ``/data`` 文件夹中, 然后执行
 
@@ -249,7 +253,21 @@ Quick Start
             type: DATASET_TYPE_TAR         # 数据集类型：tar 包
             size: 256                      # 量化校准过程中实际使用的图片张数
             batch_size: 1
-        } 
+        }
+
+        dataset_conf_error_measurement {
+            path: "../dataset/imagenet-1k-images.tar"
+            type: DATASET_TYPE_TAR         # 数据集类型: tar 包
+            size: 4                        # 逐层对分过程中实际使用的图片张数
+        }
+
+        evaluation_conf {
+            path: "neuwizard.evaluator.error_measure_evaluator"
+            type: EVALUATION_TYPE_ERROR_MEASURE
+            source_ir_types: IR_TYPE_ONNX
+            ir_types: IR_TYPE_LAVA
+            score_compare_per_layer: true
+        }  
     }
 
     # 输出 layout 设置, 建议使用 NHWC, 速度更快
@@ -305,9 +323,9 @@ Quick Start
 上板测速
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在 ``pulsar build`` 阶段生成的 ``resnet18.joint`` 模型可以在 **AX开发板** 上通过 ``run_joint`` 指令进行模型测速, 步骤如下:
+在 ``pulsar build`` 阶段生成的 ``resnet18.joint`` 模型可以在社区开发板 **AX-Pi**（`购买链接 <https://item.taobao.com/item.htm?_u=m226ocm5e25&id=682169792430>`_）或者官方 **EVB** 上通过 ``run_joint`` 指令进行模型测速, 步骤如下:
 
-- 首先通过 ``ssh`` 或 ``串口通信`` 的方式连接 **AX开发板**
+- 首先通过 ``ssh`` 或 ``串口通信`` 的方式连接 **AX-Pi**
 
 - 然后将 ``resnet18.joint`` 模型拷贝或挂载到开发板的任意文件夹下
 
@@ -347,15 +365,15 @@ Quick Start
 
     CMM usage: 13761984
 
-    Create handle took 577.64 ms (neu 9.81 ms, onnx 0.00 ms, axe 0.00 ms, overhead 567.83 ms)
-    Run task took 6986 us (99 rounds for average)
-            Run NEU took an average of 6948 us (overhead 10 us)
+    Create handle took 569.69 ms (neu 10.77 ms, onnx 0.00 ms, axe 0.00 ms, overhead 558.93 ms)
+    Run task took 5415 us (99 rounds for average)
+            Run NEU took an average of 5378 us (overhead 10 us)
 
-    NPU perf cnt total: 5444156
-            NPU perf cnt of eu(0): 2541468
+    NPU perf cnt total: 4190383
+            NPU perf cnt of eu(0): 2543447
             NPU perf cnt of eu(1): 0
             NPU perf cnt of eu(2): 0
-            NPU perf cnt of eu(3): 4068580
+            NPU perf cnt of eu(3): 2645657
             NPU perf cnt of eu(4): 0
 
 .. hint::
@@ -397,6 +415,7 @@ Quick Start
         Run AXE took an average of 43 us (overhead 4 us)
 
 从上述示例可以看出, ``NPU`` 推理耗时 ``32.626ms``, ``CPU`` 耗时 ``43us``, 模型推理的总耗时为 ``NPU`` 耗时与 ``CPU`` 耗时之和, 为 ``32.744ms``.
+(P.S.: 这段示例中的 resnet50 为了演示异构切图的功能进行了网络结构修改，不作为 resnet50 速度评估参考)
 
 **run_joint 指令说明**
 
@@ -428,7 +447,7 @@ x86仿真运行与对分说明
 
 .. attention::
 
-    注意, 本节所有内容基于工具链 ``axera_neuwizard_v0.6.1.4``, 在不同版本中, 
+    注意, 本节所有内容基于工具链 ``axera_neuwizard_v0.6.1.14``, 在不同版本中, 
     指令参数可能会不同, 使用 ``pulsar run -h`` 指令可以方便观察指令输入参数列表. 其他命令也可以采用相同方法查看参数列表.
 
 在 ``docker`` 中执行 ``pulsar run`` 命令可以获得 ``onnx`` 和 ``joint`` 模型的推理结果以及模型输出结果之间的差异程度:
@@ -691,9 +710,16 @@ x86仿真运行与对分说明
 开发板运行
 ----------------------
 
-本章节介绍如何在 ``AX620A`` 开发板上运行通过 :ref:`模型编译仿真 <model_compile_and_sim>` 章节获取 ``resnet18.joint`` 模型. 
-示例中给出了一个分类网络如何对输入图像进行分类, 而更具体的内容, 例如如何交叉编译生成可执行程序 ``ax_classification`` 
-或如何在 ``ARM`` 板上运行 **检测模型**, 请参考 :ref:`模型部署详细说明 <model_deploy_advanced>` 章节.
+本章节介绍如何在 ``AX-Pi`` 开发板上运行通过 :ref:`模型编译仿真 <model_compile_and_sim>` 章节获取 ``resnet18.joint`` 模型. 
+示例中给出了一个 分类网络 如何对输入图像进行分类, 而更具体的内容, 例如通过开源项目 `ax-samples <https://github.com/AXERA-TECH/ax-samples>`_ 源码编译生成可执行程序 ``ax_classification`` 
+以及其他示例（物体检测、图像分割、人体关键点等）, 请参考 :ref:`模型部署详细说明 <model_deploy_advanced>` 章节.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+开发板获取
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- 通过 **AX-Pi** 指定淘宝商城购买获取 (`购买链接 <https://item.taobao.com/item.htm?_u=m226ocm5e25&id=682169792430>`_);
+- 通过企业途径向 AXera 签署 NDA 后获取 **EVB**.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 板上运行的数据准备
@@ -701,9 +727,9 @@ x86仿真运行与对分说明
 
 .. hint::
 
-    上板运行示例已经打包放在 ``demo_onboard`` 文件夹下 百度网盘地址待补充
-    将下载后的文件解压, 其中 ``ax_classification`` 为预先交叉编译好的可在 ``AX620A`` 开发板上运行的分类模型可执行程序. 
-    ``resnet18.joint`` 为编译好的分类模型, ``cat.png`` 为测试图像.
+    上板运行示例已经打包放在 ``demo_onboard`` 文件夹下 `demo_onboard.zip 下载地址 <https://github.com/AXERA-TECH/ax-samples/releases/download/v0.3/demo_onboard.zip>`_
+    将下载后的文件解压, 其中 ``ax_classification`` 为预先交叉编译好的可在 ``AX-Pi`` 开发板上运行的分类模型可执行程序. 
+    ``resnet18.joint`` 为编译好的分类模型, ``cat.jpg`` 为测试图像.
 
 将 ``ax_classification``、 ``resnet18.joint``、 ``cat.png`` 拷贝到开发板上, 如果 ``ax_classification`` 缺少可执行权限, 可以通过以下命令添加
 
@@ -737,7 +763,7 @@ x86仿真运行与对分说明
 
 .. code-block:: shell
 
-    /root/yq/sample # ./ax_classification -m resnet18.joint -i cat.png -r 100
+    /root/sample # ./ax_classification -m resnet18.joint -i cat.png -r 100
     --------------------------------------
     model file : resnet18.joint
     image file : cat.jpg
@@ -754,6 +780,6 @@ x86仿真运行与对分说明
     9.0733, 282
     9.0031, 279
     --------------------------------------
-    Create handle took 579.73 ms (neu 10.05 ms, axe 0.00 ms, overhead 569.68 ms)
+    Create handle took 570.64 ms (neu 10.89 ms, axe 0.00 ms, overhead 559.75 ms)
     --------------------------------------
-    Repeat 100 times, avg time 7.00 ms, max_time 7.83 ms, min_time 6.97 ms
+    Repeat 100 times, avg time 5.42 ms, max_time 5.81 ms, min_time 5.40 ms

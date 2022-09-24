@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Axera SuperPulsar 工具链指导手册
+AXera SuperPulsar 工具链指导手册
 =======================================
 
 .. toctree::

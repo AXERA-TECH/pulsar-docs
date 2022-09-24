@@ -545,15 +545,15 @@ parse_nw_model
   该脚本统计 ``joint`` 模型中所有 ``.neu`` 的 ``CMM`` 内存, 返回结果为所有 ``.neu`` 文件的解析结果之和.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-``Joint`` 模型初始化速度补丁工具
+``joint`` 模型初始化速度补丁工具
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **概述**
 
 .. hint::
 
-  对于 ``neuwizard-0.5.29.9`` 及更早版本工具链转换的 ``Joint`` 模型文件, 
-  可以使用 ``optimize_joint_init_time.py`` 工具离线刷新, 以减少 ``Joint`` 模型加载时间, 推理结果和时间不变.
+  对于 ``neuwizard-0.5.29.9`` 及更早版本工具链转换的 ``joint`` 模型文件, 
+  可以使用 ``optimize_joint_init_time.py`` 工具离线刷新, 以减少 ``joint`` 模型加载时间, 推理结果和时间不变.
 
 **使用方法**
 
@@ -563,14 +563,14 @@ parse_nw_model
   python3 optimize_joint_init_time.py --input old.joint --output new.joint
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-将 ``Joint`` 模型中的 ``ONNX`` 子图转为 ``AXEngine`` 子图
+将 ``joint`` 模型中的 ``ONNX`` 子图转为 ``AXEngine`` 子图
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **使用方法**
 
 .. hint::
 
-  如下一条指令即可将名为 ``input.joint`` 的 ``Joint`` 模型(以 ``ONNX`` 作为 ``CPU`` 后端实现)转为 ``Joint`` 模型(以 ``AXEngine`` 作为 ``CPU`` 后端实现), 并且开启优化模式.
+  如下一条指令即可将名为 ``input.joint`` 的 ``joint`` 模型(以 ``ONNX`` 作为 ``CPU`` 后端实现)转为 ``joint`` 模型(以 ``AXEngine`` 作为 ``CPU`` 后端实现), 并且开启优化模式.
 
 .. code-block:: python
 
@@ -582,11 +582,11 @@ parse_nw_model
 
   --input
 
-    转换工具的输入 ``Joint`` 模型路径
+    转换工具的输入 ``joint`` 模型路径
   
   --output
 
-    转换工具的输出 ``Joint`` 模型路径
+    转换工具的输出 ``joint`` 模型路径
   
   --optimize_slim_model
 
@@ -613,20 +613,20 @@ parse_nw_model
 .. data:: wbt_tool 功能参数
 
   info
-    查看操作, 可以查看 ``Joint`` 模型的 ``wbt`` 名称信息, 如果是 ``None``, 在 ``fuse`` 时需要手动指定
+    查看操作, 可以查看 ``joint`` 模型的 ``wbt`` 名称信息, 如果是 ``None``, 在 ``fuse`` 时需要手动指定
 
   fuse
-    合并操作, 将多个网络结构一样, 网络权重不同的 ``Joint`` 模型, 合成一个具有多份权重的 ``Joint`` 模型
+    合并操作, 将多个网络结构一样, 网络权重不同的 ``joint`` 模型, 合成一个具有多份权重的 ``joint`` 模型
 
   split
-    拆分操作, 将一个具有多份权重的 ``Joint`` 模型, 拆分成多个网络结构一样, 网络权重不同的 ``Joint`` 模型
+    拆分操作, 将一个具有多份权重的 ``joint`` 模型, 拆分成多个网络结构一样, 网络权重不同的 ``joint`` 模型
 
 **使用限制**
 
 .. warning::
 
-  不支持含多份 ``wbt`` 的 ``Joint`` 模型之间的合并, 
-  有需求时请先拆分成多个含单份 ``wbt`` 的 ``Joint`` 模型, 再和其他模型合并.
+  不支持含多份 ``wbt`` 的 ``joint`` 模型之间的合并, 
+  有需求时请先拆分成多个含单份 ``wbt`` 的 ``joint`` 模型, 再和其他模型合并.
 
 **示例1**
 
@@ -646,7 +646,7 @@ parse_nw_model
 
 **示例2**
 
-合并名为 ``model1.joint``, ``model2.joint`` 的两个模型至名为 ``model.joint`` 的模型, 使用 ``Joint`` 模型中自带的 ``wbt_name``
+合并名为 ``model1.joint``, ``model2.joint`` 的两个模型至名为 ``model.joint`` 的模型, 使用 ``joint`` 模型中自带的 ``wbt_name``
 
 .. code-block:: python
 
@@ -675,7 +675,7 @@ parse_nw_model
 **示例5**
 
 拆分名为 ``model.joint`` 的模型, 该模型有四个 ``wbt`` 参数, ``index`` 为 ``0``, ``1``, ``2``, ``3``,
-只取 ``index`` 为 ``1, 3`` 的那两个 ``wbt``, 包装为 ``Joint`` 模型, 并取名为 ``model_idx1.joint``, ``model_idx3.joint``
+只取 ``index`` 为 ``1, 3`` 的那两个 ``wbt``, 包装为 ``joint`` 模型, 并取名为 ``model_idx1.joint``, ``model_idx3.joint``
 
 .. code-block:: python
 
@@ -878,78 +878,90 @@ hawqv2 6w8f           68.96%     172.10   61min
 
 .. code-block::
 
-  # 基本配置参数: 输入输出
-  input_type: INPUT_TYPE_ONNX
-  output_type: OUTPUT_TYPE_JOINT
+    # 基本配置参数：输入输出
+    input_type: INPUT_TYPE_ONNX
+    output_type: OUTPUT_TYPE_JOINT
 
-  # 硬件平台选择
-  target_hardware: TARGET_HARDWARE_AX620
+    # 硬件平台选择
+    target_hardware: TARGET_HARDWARE_AX620
 
-  # CPU 后端选择, 默认采用 AXE
-  cpu_backend_settings {
-      onnx_setting {
-          mode: DISABLED
-      }
-      axe_setting {
-          mode: ENABLED
-          axe_param {
-              optimize_slim_model: true
-          }
-      }
-  }
-
-  # 模型输入数据类型设置
-  input_tensors {
-      color_space: TENSOR_COLOR_SPACE_RGB
-  }
-
-  # neuwizard 工具的配置参数
-  neuwizard_conf {
-      operator_conf {
-          input_conf_items {
-              attributes {
-                  input_modifications {
-                      affine_preprocess {
-                          slope: 1
-                          slope_divisor: 255
-                          bias: 0
-                      }
-                  }
-                  input_modifications {
-                      input_normalization {
-                          mean: [0.485,0.456,0.406]  ## 均值
-                          std: [0.229,0.224,0.255]   ## 方差
-                      }
-                  }
-              }
-          }
-      }
-      dataset_conf_calibration {
-          path: "../dataset/imagenet-1k-images.tar" # 设置 PTQ 校准数据集路径
-          type: DATASET_TYPE_TAR         # 数据集类型: tar 包
-          size: 256                      # 量化校准过程中实际使用的图片张数
-          batch_size: 1
+    # CPU 后端选择，默认采用 AXE
+    cpu_backend_settings {
+        onnx_setting {
+            mode: DISABLED
+        }
+        axe_setting {
+            mode: ENABLED
+            axe_param {
+                optimize_slim_model: true
+            }
+        }
     }
 
-    dataset_conf_error_measurement {
-          path: "../dataset/imagenet-1k-images.tar"
-          type: DATASET_TYPE_TAR         # 数据集类型: tar 包
-          size: 256                      # 量化校准过程中实际使用的图片张数
+    # 模型输入数据类型设置
+    src_input_tensors {
+        color_space: TENSOR_COLOR_SPACE_RGB
     }
 
-    evaluation_conf {
-          path: "neuwizard.evaluator.error_measure_evaluator"
-          type: EVALUATION_TYPE_ERROR_MEASURE
-          source_ir_types: IR_TYPE_ONNX
-          ir_types: IR_TYPE_LAVA
-          score_compare_per_layer: true
+    dst_input_tensors {
+        color_space: TENSOR_COLOR_SPACE_RGB
+        # color_space: TENSOR_COLOR_SPACE_NV12	# 若输入数据是 NV12, 则使用该配置
     }
-  }
 
-  # pulsar compiler 的 batch size 配置参数
-  pulsar_conf {
-      batch_size: 1
-  }
+    # neuwizard 工具的配置参数
+    neuwizard_conf {
+        operator_conf {
+            input_conf_items {
+                attributes {
+                    input_modifications {
+                        affine_preprocess {
+                            slope: 1
+                            slope_divisor: 255
+                            bias: 0
+                        }
+                    }
+                    input_modifications {
+                        input_normalization {
+                            mean: [0.485,0.456,0.406]  ## 均值
+                            std: [0.229,0.224,0.255]   ## 方差
+                        }
+                    }
+                }
+            }
+        }
+        dataset_conf_calibration {
+            path: "../dataset/imagenet-1k-images.tar" # 设置 PTQ 校准数据集路径
+            type: DATASET_TYPE_TAR         # 数据集类型：tar 包
+            size: 256                      # 量化校准过程中实际使用的图片张数
+            batch_size: 1
+        }
+
+        dataset_conf_error_measurement {
+            path: "../dataset/imagenet-1k-images.tar"
+            type: DATASET_TYPE_TAR         # 数据集类型: tar 包
+            size: 4                        # 逐层对分过程中实际使用的图片张数
+        }
+
+        evaluation_conf {
+            path: "neuwizard.evaluator.error_measure_evaluator"
+            type: EVALUATION_TYPE_ERROR_MEASURE
+            source_ir_types: IR_TYPE_ONNX
+            ir_types: IR_TYPE_LAVA
+            score_compare_per_layer: true
+        }  
+    }
+
+    # 输出 layout 设置, 建议使用 NHWC, 速度更快
+    dst_output_tensors {
+        tensor_layout:NHWC
+    }
+
+    # pulsar compiler 的配置参数
+    pulsar_conf {
+        ax620_virtual_npu: AX620_VIRTUAL_NPU_MODE_111	# 业务场景需要使用 ISP, 则必须使用 vNPU 111 配置, 1.8Tops 算力给用户的算法模型
+        batch_size: 1
+        debug : false
+    }
 
 在 ``pulsar build`` 过程中, 会打印出模型每一层的精度损失情况, 如下图所示.
 
@@ -1179,7 +1191,7 @@ hawqv2 6w8f           68.96%     172.10   61min
 ``FLOAT`` 输入配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-如果期望 ``onnx`` 编译后的 ``Joint`` 模型, 能在上板时以 ``FLOAT32`` 类型作为输入, 
+如果期望 ``onnx`` 编译后的 ``joint`` 模型, 能在上板时以 ``FLOAT32`` 类型作为输入, 
 可以按照以下示例对 ``prototxt`` 配置.
 
 **代码示例**
@@ -1259,7 +1271,7 @@ Joint Layout配置
 
 在 ``0.6.0.1`` 版本之后, 如果不在 ``pulsar build`` 或者配置选项中配置编译后模型输出 ``Layout``, 则工具链默认设置编译后模型输出 ``Layout`` 为 ``NCHW``. 
 
-通过配置文件修改 ``Joint`` 输出 ``Layout`` 参考如下:
+通过配置文件修改 ``joint`` 输出 ``Layout`` 参考如下:
 
 .. code-block:: bash
   :linenos:

@@ -12,7 +12,7 @@ FAQ
 
 .. data:: joint 模型基本信息
 
-    ``Joint`` 模型基本信息:
+    ``joint`` 模型基本信息:
       - 模型输入 ``tensor`` 的 ``DType`` 默认为 ``UINT8``, ``Layout`` 为 ``NHWC``.
       - 模型输出 ``tensor`` 的 ``DType`` 默认为 ``FLOAT32``, ``Layout`` 为 ``NCHW``.
       - ``ColorSpace``: 默认为 ``TENSOR_COLOR_SPACE_AUTO``, 可以根据模型输入 ``channel`` 数自动识别
