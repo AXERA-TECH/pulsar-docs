@@ -8,8 +8,8 @@
 概述
 --------------------
 
-本节将提供运行 ``SuperPulsar`` 编译生成的 ``joint`` 模型的代码示例, 所有示例代码由 ``AX-Samples`` 项目提供。
-``AX-Samples`` 由 AXera 主导的开源项目，其目的是提供业界主流的开源算法模型部署示例代码，方便社区开发者快速对 AXera 的芯片进行评估和适配。
+本节将提供运行 ``SuperPulsar`` 编译生成的 ``joint`` 模型的代码示例, 所有示例代码由 ``ax-samples`` 项目提供。
+``ax-samples`` 由 AXera 主导的开源项目，其目的是提供业界主流的开源算法模型部署示例代码，方便社区开发者快速对 AXera 的芯片进行评估和适配。
 
 ~~~~~~~~~~~~~~~~~~~~
 获取方式
@@ -22,10 +22,10 @@
     离线版本是随着本文档发布时从 GitHub 上获取的，存在一定的延时，若想体验最新功能，请选择 GitHub 版本。
 
 ~~~~~~~~~~~~~~~~~~~~
-AX-Samples 简介
+ax-samples 简介
 ~~~~~~~~~~~~~~~~~~~~
 
-当前 ``AX-Samples`` 已验证以下开源模型:
+当前 ``ax-samples`` 已验证但不限于以下开源模型:
 
 - 分类模型
 
@@ -39,14 +39,44 @@ AX-Samples 简介
 
 - 检测模型
 
+  - PP-YOLOv3
   - YOLOv3
   - YOLOv3-Tiny
   - YOLOv4
   - YOLOv4-Tiny
+  - YOLOv5m
   - YOLOv5s
+  - YOLOv7-Tiny
   - YOLOX-S
   - YOLO-Fastest-XL
+
+- 人型检测
+  
   - YOLO-Fastest-Body
+  
+- 人脸检测
+  
+  - scrfd
+  
+- 障碍物检测 (扫地机场景)
+  
+  - Robot-Obstacle-Detect
+  
+- 3D单目车辆检测
+  
+  - Monodlex
+  
+- 人体关键点
+
+  - HRNet
+  
+- 人体分割
+  
+  - PP-HumanSeg
+  
+- 语义分割
+
+  - PP-Seg
 
 - 姿态模型
 
@@ -75,7 +105,10 @@ AX-Samples 简介
     ├── docs
     │   ├── AX620A.md
     │   ├── AX620U.md
-    │   └── compile.md
+    │   ├── body_seg_bg_res.jpg
+    │   ├── compile.md
+    │   ├── seg_res.jpg
+    │   └── yolov3_paddle.jpg
     ├── examples
     │   ├── CMakeLists.txt
     │   ├── README.md
@@ -85,18 +118,25 @@ AX-Samples 简介
     │   ├── ax_crop_resize_nv12.cc
     │   ├── ax_hrnet_steps.cc
     │   ├── ax_ld_model_mmap.cc
+    │   ├── ax_models_load_inspect.cc
+    │   ├── ax_monodlex_steps.cc
     │   ├── ax_nanodet_steps.cc
+    │   ├── ax_paddle_mobilehumseg_steps.cc
+    │   ├── ax_paddle_mobileseg.cc
     │   ├── ax_paddle_yolov3_steps.cc
     │   ├── ax_robot_obstacle_detect_steps.cc
+    │   ├── ax_scrfd_steps.cc
     │   ├── ax_yolo_fastest_body_steps.cc
     │   ├── ax_yolo_fastest_steps.cc
     │   ├── ax_yolov3_accuracy.cc
     │   ├── ax_yolov3_steps.cc
     │   ├── ax_yolov3_tiny_steps.cc
     │   ├── ax_yolov4_steps.cc
+    │   ├── ax_yolov4_tiny_3l_steps.cc
     │   ├── ax_yolov4_tiny_steps.cc
     │   ├── ax_yolov5s_620u_steps.cc
     │   ├── ax_yolov5s_steps.cc
+    │   ├── ax_yolov7_steps.cc
     │   ├── ax_yoloxs_steps.cc
     │   ├── base
     │   ├── cv
@@ -111,6 +151,11 @@ AX-Samples 简介
 --------------------
 编译示例
 --------------------
+
+**ax-samples** 的源码编译目前有两种实现路径：
+
+- 基于 AX-Pi 的本地编译，因为 AX-Pi 上集成的完成了软件开发环境，操作简单；
+- 嵌入式 Linux 交叉编译。
 
 ~~~~~~~~~~~~~~~~~~~~
 环境准备
@@ -239,9 +284,14 @@ AX-Samples 简介
         ├── ax_classification_nv12
         ├── ax_cv_test
         ├── ax_hrnet
+        ├── ax_models_load_inspect
+        ├── ax_monodlex
         ├── ax_nanodet
+        ├── ax_paddle_mobilehumseg
+        ├── ax_paddle_mobileseg
         ├── ax_paddle_yolov3
         ├── ax_robot_obstacle
+        ├── ax_scrfd
         ├── ax_yolo_fastest
         ├── ax_yolo_fastest_body
         ├── ax_yolov3
@@ -249,9 +299,69 @@ AX-Samples 简介
         ├── ax_yolov3_tiny
         ├── ax_yolov4
         ├── ax_yolov4_tiny
+        ├── ax_yolov4_tiny_3l
         ├── ax_yolov5s
         ├── ax_yolov5s_620u
+        ├── ax_yolov7
         └── ax_yoloxs
+
+~~~~~~~~~~~~~~~~~~~~
+本地编译
+~~~~~~~~~~~~~~~~~~~~
+
+^^^^^^^^^^^^^^^^^^^^
+硬件需求
+^^^^^^^^^^^^^^^^^^^^
+
+- AX-Pi（基于 AX620A，面向社区开发者的高性价比开发板）
+
+^^^^^^^^^^^^^^^^^^^^
+编译过程
+^^^^^^^^^^^^^^^^^^^^
+
+git clone 下载源码，进入 ``ax-samples`` 根目录，创建 ``cmake`` 编译任务：
+
+.. code-block:: bash
+
+  $ git clone https://github.com/AXERA-TECH/ax-samples.git
+  $ cd ax-samples
+  $ mkdir build
+  $ cd build
+  $ cmake ..
+  $ make install
+
+编译完成后，生成的可执行示例存放在 ``ax-samples/build/install/bin/`` 路径下：
+
+.. code-block:: bash
+
+  ax-samples/build$ tree install
+  install
+  └── bin
+      ├── ax_classification
+      ├── ax_classification_accuracy
+      ├── ax_classification_nv12
+      ├── ax_cv_test
+      ├── ax_hrnet
+      ├── ax_models_load_inspect
+      ├── ax_monodlex
+      ├── ax_nanodet
+      ├── ax_paddle_mobilehumseg
+      ├── ax_paddle_mobileseg
+      ├── ax_paddle_yolov3
+      ├── ax_robot_obstacle
+      ├── ax_scrfd
+      ├── ax_yolo_fastest
+      ├── ax_yolo_fastest_body
+      ├── ax_yolov3
+      ├── ax_yolov3_accuracy
+      ├── ax_yolov3_tiny
+      ├── ax_yolov4
+      ├── ax_yolov4_tiny
+      ├── ax_yolov4_tiny_3l
+      ├── ax_yolov5s
+      ├── ax_yolov5s_620u
+      ├── ax_yolov7
+      └── ax_yoloxs  
 
 
 --------------------
@@ -264,7 +374,7 @@ AX-Samples 简介
 
   这一节的示例只有 ``ax-samples`` , 并没有提供 ``mobilenetv2`` 和 ``yolov5s`` 的任何模型, 以下 log 仅供参考.
 
-登入 ``AX620A`` 开发板, 在 ``root`` 路径下创建 ``ax-samples`` 文件夹. 
+登入 ``AX620A`` 开发板, 在 ``root`` 路径下创建 ``samples`` 文件夹. 
 
 - 将 ``build/install/bin/`` 中编译生成的可执行示例拷贝到 ``/root/ax-samples/`` 路径下;
 - 将 **SuperPulsar** 生成的 ``mobilenetv2.joint`` 或 ``yolov5s.joint`` 模型拷贝到  ``/root/ax-samples/`` 路径下;
@@ -360,7 +470,7 @@ AX-Samples 简介
   --------------------------------------
   [INFO]: Virtual npu mode is 1_1
 
-  Tools version: 0.6.1.4
+  Tools version: 0.6.1.14
   59588c54
   10.8712, 283
   10.6592, 285
@@ -378,7 +488,7 @@ AX-Samples 简介
 
 .. code-block:: bash
 
-  /root/qtang # ./ax_yolov5s -m yolov5s.joint -i dog.jpg -r 100
+  /root/ax-samples # ./ax_yolov5s -m yolov5s.joint -i dog.jpg -r 100
   --------------------------------------
   model file : yolov5s.joint
   image file : dog.jpg
@@ -387,7 +497,7 @@ AX-Samples 简介
   --------------------------------------
   [INFO]: Virtual npu mode is 1_1
 
-  Tools version: 0.6.1.4
+  Tools version: 0.6.1.14
   59588c54
   run over: output len 3
   --------------------------------------
@@ -399,7 +509,6 @@ AX-Samples 简介
   16:  93%, [ 135,  219,  310,  541], dog
   2:  80%, [ 466,   77,  692,  172], car
   1:  61%, [ 169,  116,  566,  419], bicycle
-
 
 更多关于 ``ax-samples`` 的信息可以访问官方 `github <https://github.com/AXERA-TECH/ax-samples>`_ 获取，在  ``ax-samples`` 对应的 ``ModelZoo`` 中提供了更丰富内容：
   - 预编译的可执行程序（例如 ax_classification, ax_yolov5s）
