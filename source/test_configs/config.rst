@@ -4,14 +4,14 @@
 配置文件详细说明
 ============================
 
-本节将对 ``SuperPulsar Config`` 部分进行介绍.
+本节将对 ``Pulsar Config`` 部分进行介绍.
 
 ------------------------------------
 config.prototxt 概述
 ------------------------------------
 
-- ``SuperPulsar`` 是一个功能强大且复杂的工具集, 它在编译、仿真、调试模型中往往需要获得必要的配置参数, 才能精确地按照预想的方式工作
-- 当前, 所有的参数都可以通过配置文件传递给 ``SuperPulsar`` , :ref:`少数参数 <some_params_called_by_cmdline>` 可以通过命令行参数接口临时指定或修改
+- ``Pulsar`` 是一个功能强大且复杂的工具集, 它在编译、仿真、调试模型中往往需要获得必要的配置参数, 才能精确地按照预想的方式工作
+- 当前, 所有的参数都可以通过配置文件传递给 ``Pulsar`` , :ref:`少数参数 <some_params_called_by_cmdline>` 可以通过命令行参数接口临时指定或修改
 - 配置文件除了给编译器传递配置参数, 它还有一个重要的作用是可以指导编译器完成复杂的编译过程
 
 .. mermaid::
@@ -19,7 +19,7 @@ config.prototxt 概述
   graph LR
     config_prototxt[配置文件]
     command_line[命令行参数]
-    input_model[输入模型1<br/>输入模型2<br/>...<br/>输入模型N] ----> super_pulsar[SuperPulsar]
+    input_model[输入模型1<br/>输入模型2<br/>...<br/>输入模型N] ----> super_pulsar[Pulsar]
     super_pulsar ----> output_model[输出模型]
     config_prototxt -.-> |传递编译参数| super_pulsar
     command_line -.-> |设置且覆盖编译参数| super_pulsar
@@ -331,7 +331,7 @@ tensor_conf
 
 .. note::
 
-  ``SuperPulsar`` 工具链具备调整输出模型的输入/输出 ``tensor`` 的属性的能力, 
+  ``Pulsar`` 工具链具备调整输出模型的输入/输出 ``tensor`` 的属性的能力, 
   即允许输出模型(如 ``joint`` 模型)跟原始输入模型(如 ``onnx`` 模型)的输入输出数据属性(比如图像尺寸、颜色空间等)不一致.
 
 **tensor_conf** 配置包括 ``src_input_tensors`` , ``src_output_tensors`` , ``dst_input_tensors`` , ``dst_output_tensors``. 
@@ -1005,7 +1005,7 @@ pulsar_conf
         | ``VIRTUAL_NPU_MODE_222``
         | **DEFAULT:** ``VIRTUAL_NPU_MODE_AUTO``
       - | MODE_0表示不使用虚拟NPU
-        | 此配置项需要在 ``SuperPulsarConfiguration.target_hardware`` 被指定为 ``TARGET_HARDWARE_AX630`` 的前提下使用
+        | 此配置项需要在 ``PulsarConfiguration.target_hardware`` 被指定为 ``TARGET_HARDWARE_AX630`` 的前提下使用
         | 此配置项跟 ``ax620_virtual_npu`` 二选一使用
     * - ``ax620_virtual_npu``
       - pulsar_conf.ax620_virtual_npu
@@ -1016,7 +1016,7 @@ pulsar_conf
         | ``AX620_VIRTUAL_NPU_MODE_111``
         | ``AX620_VIRTUAL_NPU_MODE_112``
       - | MODE_0表示不使用虚拟NPU
-        | 此配置项需要在 ``SuperPulsarConfiguration.target_hardware`` 被指定为 ``TARGET_HARDWARE_AX620`` 的前提下使用
+        | 此配置项需要在 ``PulsarConfiguration.target_hardware`` 被指定为 ``TARGET_HARDWARE_AX620`` 的前提下使用
         | 此配置项跟 virtual_npu 二选一使用
     * - ``batch_size_option``
       - pulsar_conf.batch_size_option

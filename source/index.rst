@@ -1,19 +1,19 @@
-.. SuperPulsar documentation master file, created by
+.. Pulsar documentation master file, created by
    sphinx-quickstart on Tue Mar  1 17:28:24 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-AXera SuperPulsar 工具链指导手册
+AXera Pulsar 工具链指导手册
 =======================================
 
 .. toctree::
   :maxdepth: 2
   :numbered:
-  :caption: SuperPulsar 工具链
-  :name: SuperPulsar
+  :caption: Pulsar 工具链
+  :name: Pulsar
 
   doc_update_info/update_info.md
-  superpulsar/introduction.rst
+  pulsar/introduction.rst
   user_guides_quick/quick_start.md
   user_guides_advanced/advanced_guides.rst
   user_guides_runtime/model_deploy_guides.rst

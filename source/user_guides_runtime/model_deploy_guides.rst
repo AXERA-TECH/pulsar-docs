@@ -8,7 +8,7 @@
 概述
 --------------------
 
-本节将提供运行 ``SuperPulsar`` 编译生成的 ``joint`` 模型的代码示例, 所有示例代码由 ``ax-samples`` 项目提供。
+本节将提供运行 ``Pulsar`` 编译生成的 ``joint`` 模型的代码示例, 所有示例代码由 ``ax-samples`` 项目提供。
 ``ax-samples`` 由 AXera 主导的开源项目，其目的是提供业界主流的开源算法模型部署示例代码，方便社区开发者快速对 AXera 的芯片进行评估和适配。
 
 ~~~~~~~~~~~~~~~~~~~~
@@ -377,7 +377,7 @@ git clone 下载源码，进入 ``ax-samples`` 根目录，创建 ``cmake`` 编�
 登入 ``AX620A`` 开发板, 在 ``root`` 路径下创建 ``samples`` 文件夹. 
 
 - 将 ``build/install/bin/`` 中编译生成的可执行示例拷贝到 ``/root/ax-samples/`` 路径下;
-- 将 **SuperPulsar** 生成的 ``mobilenetv2.joint`` 或 ``yolov5s.joint`` 模型拷贝到  ``/root/ax-samples/`` 路径下;
+- 将 **Pulsar** 生成的 ``mobilenetv2.joint`` 或 ``yolov5s.joint`` 模型拷贝到  ``/root/ax-samples/`` 路径下;
 - 将测试图片拷贝到 ``/root/ax-samples/`` 路径下.
 
 .. attention::

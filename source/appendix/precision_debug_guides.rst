@@ -73,7 +73,7 @@ CheckLists
 
 .. hint::
 
-    ``pulsar run`` 为 ``SuperPulsar`` 工具链中用于仿真和对分的集成工具, 详情可以参考 :ref:`x86平台下仿真与对分 <pulsar_run_sim>`
+    ``pulsar run`` 为 ``Pulsar`` 工具链中用于仿真和对分的集成工具, 详情可以参考 :ref:`x86平台下仿真与对分 <pulsar_run_sim>`
 
 如果原始 ``onnx`` 模型编译为 ``joint`` 模型后, ``pulsar run`` 的 ``cos-sim`` 很低, 说明转换后的模型发生了精度损失, 需要排查问题出现的具体位置.
 
