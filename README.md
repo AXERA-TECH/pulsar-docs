@@ -1,4 +1,4 @@
-# pulsar User Manual
+# Pulsar User Manual
 
 [Web 预览](https://pulsar-docs.readthedocs.io/zh_CN/latest/index.html#)
 
@@ -30,21 +30,17 @@ git clone https://github.com/AXERA-TECH/pulsar-doc.git
 ├── Makefile
 ├── README.md
 ├── requirements.txt
-├── source                     # 文档主体
-│   ├── conf.py
-│   ├── examples               # 以 .zip 格式保存了一些例子, 由于git pages的限制, 在线文档不支持点击下载操作
-│   ├── faq
-│   ├── index.rst
-│   ├── media
-│   ├── pulsar
-│   ├── test_configs
-│   ├── user_guides_advanced
-│   ├── user_guides_quick
-│   └── user_guides_runtime
-└── third_party
-    ├── ax-samples             # 模型上板运行示例 Demo
-    ├── README.md
-    └── test-model-zoo         # 相关 onnx 以及对应的 joint 模型
+└── source                     # 文档主体
+    ├── conf.py
+    ├── examples               # 以 .zip 格式保存了一些例子, 由于git pages的限制, 在线文档不支持点击下载操作
+    ├── faq
+    ├── index.rst
+    ├── media
+    ├── pulsar
+    ├── test_configs
+    ├── user_guides_advanced
+    ├── user_guides_quick
+    └── user_guides_runtime
 ```
 
 ### 2.2 编译
