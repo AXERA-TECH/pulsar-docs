@@ -250,15 +250,16 @@ ax-samples 简介
 
 - 在 ax-samples 创建 3rdparty 文件，并将下载好的 OpenCV 库文件压缩包解压到该文件夹中。
 
-**BSP 依赖库准备**
+**依赖库准备**
 
 获取 AX620 BSP 开发包后，执行如下操作
 
+- 下载 **ax-samples** 交叉编译依赖库文件并解压到指定路径 `ax_bsp`, `依赖库获取地址 <https://github.com/AXERA-TECH/ax-samples/releases/download/v0.3/arm_axpi_r1.22.2801.zip>`_
+
 .. code-block:: bash
 
-    tar -zxvf AX620_SDK_XXX.tgz
-    cd AX620_SDK_XXX/package
-    tar -zxvf msp.tgz
+    $ wget https://github.com/AXERA-TECH/ax-samples/releases/download/v0.3/arm_axpi_r1.22.2801.zip
+    $ unzip arm_axpi_r1.22.2801.zip -d ax_bsp
 
 **源码编译**
 
@@ -268,7 +269,7 @@ ax-samples 简介
 
     $ mkdir build
     $ cd build
-    $ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake -DBSP_MSP_DIR=${AX620_SDK_XXX}/msp/out/ ..
+    $ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake -DBSP_MSP_DIR=${ax_bsp}/ ..
     $ make install
 
 
