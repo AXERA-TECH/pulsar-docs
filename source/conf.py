@@ -20,7 +20,7 @@ from recommonmark.transform import AutoStructify
 import sphinxcontrib.mermaid
 # -- Project information -----------------------------------------------------
 
-project = 'SuperPulsar'
+project = 'Pulsar'
 copyright = '2022, AXera 爱芯元智'
 author = 'AXera-Tech'
 

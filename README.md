@@ -1,6 +1,6 @@
-# SuperPulsar User Manual
+# pulsar User Manual
 
-[Web 预览](https://superpulsar-docs.readthedocs.io/zh_CN/latest/index.html#)
+[Web 预览](https://pulsar-docs.readthedocs.io/zh_CN/latest/index.html#)
 
 ## 1. 项目背景
 
@@ -15,7 +15,7 @@
 ### 2.1 git clone
 
 ```bash
-git clone https://github.com/AXERA-TECH/superpulsar-doc.git
+git clone https://github.com/AXERA-TECH/pulsar-doc.git
 ```
 
 目录树如下:
@@ -36,7 +36,7 @@ git clone https://github.com/AXERA-TECH/superpulsar-doc.git
 │   ├── faq
 │   ├── index.rst
 │   ├── media
-│   ├── superpulsar
+│   ├── pulsar
 │   ├── test_configs
 │   ├── user_guides_advanced
 │   ├── user_guides_quick

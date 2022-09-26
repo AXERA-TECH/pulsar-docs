@@ -107,7 +107,7 @@ FAQ
 
 .. data:: 转出来的 .joint 模型可以像之前 .neu 模型上板跑么
 
-  ``.joint`` 可以像 ``.neu`` 一样上板跑. 事实上 ``.joint`` 模型是当前主流上板模型格式 ``.neu`` 模型是旧版格式, ``SuperPulsar`` 可以将 ``.neu`` 模型转换成 ``.joint`` 模型
+  ``.joint`` 可以像 ``.neu`` 一样上板跑. 事实上 ``.joint`` 模型是当前主流上板模型格式 ``.neu`` 模型是旧版格式, ``Pulsar`` 可以将 ``.neu`` 模型转换成 ``.joint`` 模型
 
 .. data:: PTQ 能跑 GPU 吗
 

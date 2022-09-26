@@ -6,7 +6,7 @@ Quick Start
 
 * 如何在不同系统环境下安装 ``Docker``
 * 如何启动 ``Docker`` 容器
-* 如何利用 ``SuperPulsar Docker`` 工具链将 ``onnx`` 模型转换为 ``joint`` 模型
+* 如何利用 ``Pulsar Docker`` 工具链将 ``onnx`` 模型转换为 ``joint`` 模型
 * 如何使用 ``joint`` 模型在 ``x86`` 平台上仿真运行
 * 如何衡量 ``joint`` 的推理结果与 ``onnx`` 推理结果之间的差异度(内部称之为 ``对分``)
 
@@ -22,9 +22,9 @@ Quick Start
 开发环境准备
 ----------------------
 
-本节介绍使用 ``SuperPulsar`` 工具链前的开发环境准备工作.
+本节介绍使用 ``Pulsar`` 工具链前的开发环境准备工作.
 
-``SuperPulsar`` 使用 ``Docker`` 容器进行工具链集成, 用户可以通过 ``Docker`` 加载 ``SuperPulsar`` 镜像文件, 然后进行模型转换、编译、仿真等工作, 因此开发环境准备阶段只需要正确安装 ``Docker`` 环境即可. 支持的系统 ``MacOS``, ``Linux``, ``Windows``.
+``Pulsar`` 使用 ``Docker`` 容器进行工具链集成, 用户可以通过 ``Docker`` 加载 ``Pulsar`` 镜像文件, 然后进行模型转换、编译、仿真等工作, 因此开发环境准备阶段只需要正确安装 ``Docker`` 环境即可. 支持的系统 ``MacOS``, ``Linux``, ``Windows``.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 安装 Docker 开发环境
@@ -43,13 +43,13 @@ Quick Start
     $ sudo docker -v
     Docker version 20.10.7, build f0df350
 
-显示以上内容, 说明 ``Docker`` 已经安装成功. 下面将介绍 ``SuperPulsar`` 工具链 ``Image`` 的安装和启动.
+显示以上内容, 说明 ``Docker`` 已经安装成功. 下面将介绍 ``Pulsar`` 工具链 ``Image`` 的安装和启动.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-安装 SuperPulsar 工具链
+安装 Pulsar 工具链
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-以系统版本为 ``Ubuntu 18.04``、工具链 ``axera_neuwizard_v0.6.1.14.tar.gz`` 为例说明 ``SuperPulsar`` 工具链的安装方法.
+以系统版本为 ``Ubuntu 18.04``、工具链 ``axera_neuwizard_v0.6.1.14.tar.gz`` 为例说明 ``Pulsar`` 工具链的安装方法.
 工具链获取途径：
 
 - 从 AX-Pi 社区工具链仓库下载；
@@ -101,7 +101,7 @@ Quick Start
 
 .. attention::
 
-    ``SuperPulsar`` 工具链基于 ``Docker`` 容器构建, 运行时对物理机内存要求较高, 通常推荐物理机内存至少为 ``32G`` 及以上, 
+    ``Pulsar`` 工具链基于 ``Docker`` 容器构建, 运行时对物理机内存要求较高, 通常推荐物理机内存至少为 ``32G`` 及以上, 
     在模型转换期间如果内存不足, 可能会出现 ``neuwizard killed by SIGKILL`` 错误.
 
 执行以下命令启动 ``Docker`` 容器, 运行成功后进入 ``bash`` 环境
@@ -166,7 +166,7 @@ Quick Start
 命令说明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``SuperPulsar`` 工具链中的功能指令以 ``pulsar`` 开头, 与用户强相关的命令为 ``pulsar build`` , ``pulsar run`` 以及 ``pulsar version``. 
+``Pulsar`` 工具链中的功能指令以 ``pulsar`` 开头, 与用户强相关的命令为 ``pulsar build`` , ``pulsar run`` 以及 ``pulsar version``. 
 
 * ``pulsar build`` 用于将 ``onnx`` 模型转换为 ``joint`` 格式模型
 * ``pulsar run`` 用于模型转换前后的 ``对分`` 验证
