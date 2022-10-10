@@ -52,7 +52,7 @@ Quick Start
 以系统版本为 ``Ubuntu 18.04``、工具链 ``axera_neuwizard_v0.6.1.14.tar.gz`` 为例说明 ``Pulsar`` 工具链的安装方法.
 工具链获取途径：
 
-- 从 AX-Pi 社区工具链仓库下载；
+- 从 AXera-Pi 开发者社区 `获取 <https://wiki.sipeed.com/ai/zh/deploy/ax-pi.html#%E4%B8%8B%E8%BD%BD%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7>`_；
 - 通过企业途径向 AXera 签署 NDA 后由其技术支持人员释放。
 
 ^^^^^^^^^^^^^^^^^^^^^^^
